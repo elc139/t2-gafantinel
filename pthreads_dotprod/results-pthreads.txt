@@ -1,0 +1,163 @@
+~~~~~~ START ~~~~~~
+1 thread(s), 6975845 usec
+
+2 thread(s), 3921629 usec
+
+3 thread(s), 3527261 usec
+
+4 thread(s), 3197273 usec
+
+5 thread(s), 3203518 usec
+
+6 thread(s), 3155235 usec
+
+7 thread(s), 3141454 usec
+
+8 thread(s), 3125835 usec
+
+1 thread(s), 7053452 usec
+
+2 thread(s), 3814293 usec
+
+3 thread(s), 3616139 usec
+
+4 thread(s), 3191108 usec
+
+5 thread(s), 3262480 usec
+
+6 thread(s), 3131077 usec
+
+7 thread(s), 3141750 usec
+
+8 thread(s), 3067586 usec
+
+1 thread(s), 6982616 usec
+
+2 thread(s), 3800422 usec
+
+3 thread(s), 3461449 usec
+
+4 thread(s), 3124282 usec
+
+5 thread(s), 3162977 usec
+
+6 thread(s), 3144403 usec
+
+7 thread(s), 3152986 usec
+
+8 thread(s), 3128429 usec
+
+1 thread(s), 7037588 usec
+
+2 thread(s), 3886131 usec
+
+3 thread(s), 3622427 usec
+
+4 thread(s), 3172964 usec
+
+5 thread(s), 3217451 usec
+
+6 thread(s), 3265248 usec
+
+7 thread(s), 3199782 usec
+
+8 thread(s), 3153674 usec
+
+1 thread(s), 7110721 usec
+
+2 thread(s), 3884273 usec
+
+3 thread(s), 3611150 usec
+
+4 thread(s), 3237367 usec
+
+5 thread(s), 3232405 usec
+
+6 thread(s), 3255257 usec
+
+7 thread(s), 3232766 usec
+
+8 thread(s), 3122055 usec
+
+1 thread(s), 6978078 usec
+
+2 thread(s), 3933016 usec
+
+3 thread(s), 3553630 usec
+
+4 thread(s), 3188248 usec
+
+5 thread(s), 3272665 usec
+
+6 thread(s), 3243885 usec
+
+7 thread(s), 3207949 usec
+
+8 thread(s), 3189499 usec
+
+1 thread(s), 7085982 usec
+
+2 thread(s), 3918282 usec
+
+3 thread(s), 3553206 usec
+
+4 thread(s), 3324103 usec
+
+5 thread(s), 3242244 usec
+
+6 thread(s), 3277281 usec
+
+7 thread(s), 3337318 usec
+
+8 thread(s), 3180067 usec
+
+1 thread(s), 7126817 usec
+
+2 thread(s), 3887829 usec
+
+3 thread(s), 3649932 usec
+
+4 thread(s), 3350965 usec
+
+5 thread(s), 3249704 usec
+
+6 thread(s), 3170291 usec
+
+7 thread(s), 3169387 usec
+
+8 thread(s), 3095406 usec
+
+1 thread(s), 7070376 usec
+
+2 thread(s), 3833792 usec
+
+3 thread(s), 3538209 usec
+
+4 thread(s), 3289561 usec
+
+5 thread(s), 3183541 usec
+
+6 thread(s), 3200143 usec
+
+7 thread(s), 3254787 usec
+
+8 thread(s), 3321624 usec
+
+1 thread(s), 7047765 usec
+
+2 thread(s), 3929564 usec
+
+3 thread(s), 3525322 usec
+
+4 thread(s), 3275103 usec
+
+5 thread(s), 3218872 usec
+
+6 thread(s), 3245674 usec
+
+7 thread(s), 3190724 usec
+
+8 thread(s), 3117490 usec
+
+~~~~~~ END ~~~~~~
+

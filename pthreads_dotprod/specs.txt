@@ -1,0 +1,4 @@
+Processador: Intel Core i7-4500U 1.8 GHz
+Memória RAM: 8 GB
+GPU: Nvidia GT 740M
+Sistema Operacional: Linux Mint 19.3

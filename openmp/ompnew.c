@@ -1,11 +1,5 @@
-/*
- *  Exemplo de programa para calculo de produto escalar em paralelo, usando POSIX threads.
- *  andrea@inf.ufsm.br
- */
-
 #include <stdio.h>
 #include <stdlib.h>
-// #include <pthread.h>
 #include <time.h>
 #include <omp.h>
 
@@ -20,8 +14,7 @@ typedef struct
 
 // Variaveis globais, acessiveis por todas threads
 dotdata_t dotdata;
-double c = 0.0;
-// pthread_mutex_t mutexsum;
+double c;
 
 /*
  * Funcao executada por uma thread
@@ -30,7 +23,7 @@ void dotprod_worker(int number_of_threads)
 {
    omp_set_num_threads(number_of_threads);
    long offset;
-   #pragma omp parallel for reduction (+: c) shared(dotdata, number_of_threads)
+   #pragma omp parallel for reduction (+: c)
    for (offset=0;offset<number_of_threads;offset++) {
       int i, k;
       // long offset = (long) arg;
@@ -48,42 +41,10 @@ void dotprod_worker(int number_of_threads)
          }
       }
 
-   //    pthread_mutex_lock (&mutexsum);
       c += mysum;
-   //    pthread_mutex_unlock (&mutexsum);
-
-   //    pthread_exit((void*) 0);
    }
 
 }
-
-
-/* 
- * Distribui o trabalho entre nthreads
- */
-// void dotprod_threads(int nthreads)
-// {
-//    int i;
-//    pthread_t *threads;
-//    pthread_attr_t attr;
-
-//    threads = (pthread_t *) malloc(nthreads * sizeof(pthread_t));
-//    pthread_mutex_init(&mutexsum, NULL);
-
-//    pthread_attr_init(&attr);
-//    pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
-
-//    for (i = 0; i < nthreads; i++) {
-//       pthread_create(&threads[i], &attr, dotprod_worker, (void *) i);
-//    }
-//    pthread_attr_destroy(&attr);
-//    for (i = 0; i < nthreads; i++) {
-//       pthread_join(threads[i], NULL);
-//    }
-//    free(threads);
-// }
-
-
 /*
  * Tempo (wallclock) em microssegundos
  */ 
@@ -129,10 +90,10 @@ int main(int argc, char **argv)
    fill(dotdata.b, wsize*nthreads, 1.0);
    dotdata.wsize = wsize;
    dotdata.repeat = repeat;
+   c = 0.0;
 
    // Calcula c = a . b em nthreads, medindo o tempo
    start_time = wtime();
-   // dotprod_threads(nthreads);
    dotprod_worker(nthreads);
    end_time = wtime();
 

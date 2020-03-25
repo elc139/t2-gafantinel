@@ -1,0 +1,19 @@
+~~~~~~ START ~~~~~~
+1 thread(s), 8356463 usec
+
+2 thread(s), 4483637 usec
+
+3 thread(s), 3637607 usec
+
+4 thread(s), 3168128 usec
+
+5 thread(s), 3213450 usec
+
+6 thread(s), 3264155 usec
+
+7 thread(s), 3223441 usec
+
+8 thread(s), 3202309 usec
+
+1 thread(s), 7057450 usec
+

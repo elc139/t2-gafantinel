@@ -7,46 +7,54 @@
 #include <stdlib.h>
 // #include <pthread.h>
 #include <time.h>
+#include <omp.h>
 
 typedef struct 
  {
    double *a;
    double *b;
-   double c; 
+   // double c; 
    int wsize;
    int repeat; 
  } dotdata_t;
 
 // Variaveis globais, acessiveis por todas threads
 dotdata_t dotdata;
+double c = 0.0;
 // pthread_mutex_t mutexsum;
 
 /*
  * Funcao executada por uma thread
  */
-void *dotprod_worker(void *arg)
+void dotprod_worker(int number_of_threads)
 {
-   int i, k;
-   long offset = (long) arg;
-   double *a = dotdata.a;
-   double *b = dotdata.b;     
-   int wsize = dotdata.wsize;
-   int start = offset*wsize;
-   int end = start + wsize;
-   double mysum;
+   omp_set_num_threads(number_of_threads);
+   long offset;
+   #pragma omp parallel for reduction (+: c) shared(dotdata, number_of_threads)
+   for (offset=0;offset<number_of_threads;offset++) {
+      int i, k;
+      // long offset = (long) arg;
+      double *a = dotdata.a;
+      double *b = dotdata.b;     
+      int wsize = dotdata.wsize;
+      int start = offset*wsize;
+      int end = start + wsize;
+      double mysum = 0.0;
 
-   for (k = 0; k < dotdata.repeat; k++) {
-      mysum = 0.0;
-      for (i = start; i < end ; i++)  {
-         mysum += (a[i] * b[i]);
+      for (k = 0; k < dotdata.repeat; k++) {
+         mysum = 0.0;
+         for (i = start; i < end ; i++)  {
+            mysum += (a[i] * b[i]);
+         }
       }
+
+   //    pthread_mutex_lock (&mutexsum);
+      c += mysum;
+   //    pthread_mutex_unlock (&mutexsum);
+
+   //    pthread_exit((void*) 0);
    }
 
-//    pthread_mutex_lock (&mutexsum);
-   dotdata.c += mysum;
-//    pthread_mutex_unlock (&mutexsum);
-
-//    pthread_exit((void*) 0);
 }
 
 
@@ -119,17 +127,17 @@ int main(int argc, char **argv)
    fill(dotdata.a, wsize*nthreads, 0.01);
    dotdata.b = (double *) malloc(wsize*nthreads*sizeof(double));
    fill(dotdata.b, wsize*nthreads, 1.0);
-   dotdata.c = 0.0;
    dotdata.wsize = wsize;
    dotdata.repeat = repeat;
 
    // Calcula c = a . b em nthreads, medindo o tempo
    start_time = wtime();
-//    dotprod_threads(nthreads);
+   // dotprod_threads(nthreads);
+   dotprod_worker(nthreads);
    end_time = wtime();
 
    // Mostra resultado e estatisticas da execucao
-   printf("%f\n", dotdata.c);
+   printf("%f\n", c);
    printf("%d thread(s), %ld usec\n", nthreads, (long) (end_time - start_time));
    fflush(stdout);
 

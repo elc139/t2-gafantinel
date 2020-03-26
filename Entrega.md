@@ -68,7 +68,7 @@ A tabela completa pode ser conferida em ```tabela-pthreads.ods```
 O programa ```pthreads_dotprod.c``` tem o cuidado de executar as operações de soma com o auxílio de um mutex, o que garante que o resultado da operação será correto, independente da velocidade em que cada thread é executada. O programa ```pthreads_dotprod2.c```, por sua vez, tem as linhas correspondentes ao mutex removidas, o que pode acarretar uma condição de corrida no programa, já que as threads são executadas desordenadamente e podem vir a retornar um output diferente do esperado.
 # OpenMP
 ## 1. Implemente um programa equivalente a pthreads_dotprod.c usando OpenMP.
-A implementação está em ```openmp/ompnew.c```.
+A implementação está em [openmp/ompnew.c](https://github.com/elc139/t2-gafantinel/blob/master/openmp/ompnew.c).
 
 ## 2. Avalie o desempenho do programa em OpenMP, usando os mesmos dados/argumentos do programa com threads POSIX.
 Para a execução do programa múltiplas vezes, usou-se o script do programa de pthreads modificado para se adequar ao arquivo ```ompnew```, salvando-se os dados na tabela ```tabela-openmp.ods```.

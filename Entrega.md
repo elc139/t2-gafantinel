@@ -1,3 +1,6 @@
+# Nome: Gustavo Arrua Fantinel
+# Disciplina: Programação Paralela
+
 # Pthreads
 ## 1. Explique como se encontram implementadas as 4 etapas de projeto: particionamento, comunicação, aglomeração, mapeamento (use trechos de código para ilustrar a explicação).
 O particionamento ocorre no momento em que as tarefas são subdivididas entre as threads disponíveis, o que ocorre na linha 68 até 70:

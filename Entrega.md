@@ -1,5 +1,30 @@
 # Pthreads
 ## 1. Explique como se encontram implementadas as 4 etapas de projeto: particionamento, comunicação, aglomeração, mapeamento (use trechos de código para ilustrar a explicação).
+O particionamento ocorre no momento em que as tarefas são subdivididas entre as threads disponíveis, o que ocorre na linha 68 até 70:
+```c
+for (i = 0; i < nthreads; i++) {
+    pthread_create(&threads[i], &attr, dotprod_worker, (void *) i);
+}
+```
+
+A comunicação, responsável por evitar que o programa entre em condições de corrida, é representada nas linhas 46 a 47:
+```c
+pthread_mutex_lock (&mutexsum);
+dotdata.c += mysum;
+pthread_mutex_unlock (&mutexsum);
+```
+
+A aglomeração, responsável nesse caso pelo somatório dos valores calculados, está localizado na linha 41:
+```c
+mysum += (a[i] * b[i]);
+```
+
+Por fim, o mapeamento ocorre de forma estática, uma vez que o programa utiliza os argumentos passados no momento da sua chamada e atribui os valores às variáveis correspondentes, o que ocorre nas linhas 83 a 85:
+```c
+nthreads = atoi(argv[1]); 
+wsize = atoi(argv[2]);  // worksize = tamanho do vetor de cada thread
+repeat = atoi(argv[3]); // numero de repeticoes dos calculos (para aumentar carga)
+```
 
 ## 2. Considerando o tempo (em microssegundos) mostrado na saída do programa, qual foi a aceleração (speedup) com o uso de threads?
 
@@ -22,7 +47,7 @@ E considerando que a aceleração(speedup) pode ser obtido através da Lei de Am
 ## 3. A aceleração se sustenta para outros tamanhos de vetores, números de threads e repetições? Para responder a essa questão,você terá que realizar diversas execuções, variando o tamanho do problema (tamanho dos vetores e número de repetições) e o número de threads (1, 2, 4, 8..., dependendo do número de núcleos). Cada caso deve ser executado várias vezes, para depois calcular-se um tempo de processamento médio para cada caso. Atenção aos fatores que podem interferir na confiabilidade da medição: uso compartilhado do computador, tempos muito pequenos, etc.
 
 Para responder a questão, foi implementado o seguinte script:
-```
+```bash
 #!/bin/bash
 echo '~~~~~~ START ~~~~~~'
 for i in $(seq 1 10); do threads=1; for i in $(seq 1 8); do ./pthreads_dotprod $threads $((1000000/$threads)) 2000 | grep 'thread'; echo ''; threads=$(($threads+1)); done; done
@@ -50,7 +75,16 @@ Para a execução do programa múltiplas vezes, usou-se o script do programa de 
 
 Foi possível notar que, assim como o programa com threads POSIX, houve um grande ganho na aceleração do programa ao utilizar mais de 1 thread, atingindo-se um plateau de aceleração quando utilizamos 5 threads ou mais. Ainda, notou-se que o programa com OpenMP teve desempenho ligeiramente superior ao programa com POSIX, quando comparados os seus tempos de execução.
 
+Gerou-se, portanto, o seguinte gráfico:
+
+![](openmp/grafico-openmp.png)
+
 ## Referências
 
 https://pt.wikipedia.org/wiki/Lei_de_Amdahl
+
 https://stackoverflow.com/questions/27056090/how-to-parallelize-this-array-sum-using-openmp
+
+https://www.youtube.com/watch?v=1JU931jZP2s
+
+https://docs.microsoft.com/pt-br/cpp/parallel/openmp/reference/openmp-clauses?view=vs-2019#shared-openmp

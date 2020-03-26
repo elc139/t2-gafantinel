@@ -45,6 +45,7 @@ void dotprod_worker(int number_of_threads)
    }
 
 }
+
 /*
  * Tempo (wallclock) em microssegundos
  */ 
